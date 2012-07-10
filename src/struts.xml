@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN" "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<constant name="struts.multipart.maxSize" value="15000000" />
+
+	<package name="demo" extends="struts-default, json-default">
+		
+		<!-- COMIENZAN ACCIONES DE LOGIN -->
+		
+		<action name="Login" class="com.simulador.acciones.Login" method="mostrarForm">
+			<result name="success">login.jsp</result>
+			<result name="input" type="redirectAction">
+				<param name="actionName">Dashboard</param>
+			</result>
+		</action>
+		
+		<action name="Logout" class="com.simulador.acciones.Login" method="salir">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="redirectAction">
+            	<param name="actionName">Login</param>
+            </result>
+		</action>
+		
+		<action name="verificarUsuario" class="com.simulador.acciones.Login" method="verificarDatos">
+			<result type="json"></result>
+		</action>
+		
+		<action name="Dashboard" class="com.simulador.acciones.Login">
+			<result name="success">dashboard.jsp</result>
+			<result name="error" type="redirectAction">
+            	<param name="actionName">Login</param>
+            	<param name="acceso">denegado</param>
+            </result>
+		</action>
+		
+		<!-- FIN LOGIN -->
+		
+		<!-- COMIENZAN ACCIONES DE INSTRUCTORES -->
+		
+		<action name="instructores" class="com.simulador.acciones.Instructores" method="obtenerTodos">
+			<result name="success">instructores.jsp</result>
+			<result name="error" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            	<param name="acceso">denegado</param>
+            </result>
+		</action>
+		
+		<action name="borrarInstructor" class="com.simulador.acciones.Instructores" method="borrarInstructor">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json"></result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+		
+		<action name="obtenerDatosInstructor" class="com.simulador.acciones.Instructores" method="obtenerDatos">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+
+		<action name="registrarInstructor" class="com.simulador.acciones.Instructores" method="altaInstructor">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+		
+		<action name="modificarInstructor" class="com.simulador.acciones.Instructores" method="modificarInstructor">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+		
+		<!-- FIN INSTRUCTORES -->
+		
+		<!-- INICIA ACCIONES DE GRUPOS  -->
+		
+		<action name="grupos" class="com.simulador.acciones.Grupos" method="mostrarGrupos">
+			<result name="success">grupos.jsp</result>
+			<result name="error" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            	<param name="acceso">denegado</param>
+            </result>
+		</action>
+		
+		<action name="registrarGrupo" class="com.simulador.acciones.Grupos" method="altaGrupo">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+		
+		<action name="obtenerDatosGrupo" class="com.simulador.acciones.Grupos" method="obtenerDatosGrupo">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+		
+		<action name="modificarGrupo" class="com.simulador.acciones.Grupos" method="modificarGrupo">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json">
+				<param name="root">action</param>
+			</result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+		
+		<action name="borrarGrupo" class="com.simulador.acciones.Grupos" method="borrarGrupo">
+			<result name="error">/error.jsp</result>
+			<result name="success" type="json"></result>
+            <result name="input" type="redirectAction">
+            	<param name="actionName">Dashboard</param>
+            </result>
+		</action>
+		
+		<!-- FIN GRUPOS -->
+		
+	</package>
+</struts>
